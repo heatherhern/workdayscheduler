@@ -34,23 +34,23 @@ function hourNumberFromHourString(hourString) {
     }
 }
 
-// counter adds a number to the end of each #time so we can loop through them one by one //
 for(var property in workDay) {
-    let counter = 1;
-    let textId = "#text-area" + counter;
-    $(textId).text(workDay[property]);
     let currentTime = moment().hour();
-    let timeId = "#time" + counter;
-    let timeString = $(timeId).text();
+
+    let textClass = ".text" 
+    $(textClass).text(workDay[property]);
+
+    let timeClass = ".time"
+    let timeString = $(timeClass).text();
     let timeNumber = hourNumberFromHourString(timeString);
+
     if(timeNumber < currentTime) {
-        $("#text-area").addClass("past");
+        $(".text").addClass("past");
     } else if (timeNumber > currentTime) {
-        $("#text-area").addClass("future");
+        $(".text").addClass("future");
     } else {
-        $("#text-area").addClass("present");
+        $(".text").addClass("present");
     }
-    counter ++;
 }
 
 // pulls up workDay object when page loads //
