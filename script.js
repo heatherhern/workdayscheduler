@@ -18,7 +18,7 @@ let workDay = {
     "5 PM": "",
 };
 
-// Changes each hour into a number //
+// Changes each time string into a number //
 function hourNumberFromHourString(hourString) {
     switch(hourString) {
     case "8 AM": return 8;
@@ -34,7 +34,26 @@ function hourNumberFromHourString(hourString) {
     }
 }
 
+// counter adds a number to the end of each #time so we can loop through them one by one //
+for(var property in workDay) {
+    let counter = 1;
+    let textId = "#text-area" + counter;
+    $(textId).text(workDay[property]);
+    let currentTime = moment().hour();
+    let timeId = "#time" + counter;
+    let timeString = $(timeId).text();
+    let timeNumber = hourNumberFromHourString(timeString);
+    if(timeNumber < currentTime) {
+        $("#text-area").addClass("past");
+    } else if (timeNumber > currentTime) {
+        $("#text-area").addClass("future");
+    } else {
+        $("#text-area").addClass("present");
+    }
+    counter ++;
+}
 
+// pulls up workDay object when page loads //
 $(document).ready(function(){
     if(!localStorage.getItem('workDay')) {
     updateNotes(workDay);
@@ -79,23 +98,4 @@ function updateNotes(dayObject) {
     let res = $(this).children("div");
     $(this).children("textarea").text(dayObject[res.text()]);
     })
-}
-
-
-let counter = 1;
-for(const property in workDay) {
-    let textId = "#text-area" + counter;
-    $(textId).text(workDay[property]);
-    let currentTime = moment().hour();
-    let timeId = "#time" + counter;
-    let timeString = $(timeId).text();
-    let timeNumber = hourNumberFromHourString(timeString);
-    if(timeNumber < currentTime) {
-        $("#text-area").addClass("past");
-    } else if (timeNumber > currentTime) {
-        $("#text-area").addClass("future");
-    } else {
-        $("#text-area").addClass("present");
-    }
-    counter ++;
 }
