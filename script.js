@@ -35,23 +35,66 @@ function hourNumberFromHourString(hourString) {
 }
 
 for(var property in workDay) {
-    let currentTime = moment().hour();
+    // let currentTime = moment().hour();
+    currentTime = 14.1;
 
-    let textClass = ".text" 
+    let textClass = ".text"
     $(textClass).text(workDay[property]);
 
     let timeClass = ".time"
     let timeString = $(timeClass).text();
     let timeNumber = hourNumberFromHourString(timeString);
 
-    if(timeNumber < currentTime) {
-        $(".text").addClass("past");
-    } else if (timeNumber > currentTime) {
+    // new for loop to style colors of the hours //
+    if (currentTime >= 8 && currentTime < 9) {
+        $("#text-area-1").addClass("present");
         $(".text").addClass("future");
-    } else {
-        $(".text").addClass("present");
+    } else if (currentTime >= 9 && currentTime < 10) {
+        $("#text-area-2").addClass("present");
+        $(".text").addClass("future");
+    } else if (currentTime >= 10 && currentTime < 11) {
+        $("#text-area-3").addClass("present");
+        $(".text").addClass("future");
+    } else if (currentTime >= 11 && currentTime < 12) {
+        $("#text-area-4").addClass("present");
+        $(".text").addClass("future");
+    } else if (currentTime >= 12 && currentTime < 13) {
+        $("#text-area-5").addClass("present");
+        $(".text").addClass("future");
+    } else if (currentTime >= 13 && currentTime < 14) {
+        $("#text-area-6").addClass("present");
+        $(".text").addClass("future");
+    } else if (currentTime >= 14 && currentTime < 15) {
+        $("#text-area-7").addClass("present");
+        // $("#text-area-8").addClass("future");
+        // $(".text").addClass("future");
+    } else if (currentTime >= 15 && currentTime < 16) {
+        $("#text-area-8").addClass("present");
+        $(".text").addClass("future");
+    } else if (currentTime >= 16 && currentTime < 17) {
+        $("#text-area-9").addClass("present");
+        $(".text").addClass("future");
+    } else if (currentTime >= 17 && currentTime < 18) {
+        $("#text-area-10").addClass("present");
+        $(".text").addClass("future");
+    } else if (currentTime >= 18) {
+        $(".text").addClass("past");
     }
-}
+        
+
+//     if(timeNumber < currentTime) {
+//         $(".text").addClass("past");
+//     } else if (timeNumber > currentTime) {
+//         $(".text").addClass("future");
+//     } else {
+//         $(".text").addClass("present");
+//     }
+// }
+
+
+
+
+
 
 // pulls up workDay object when page loads //
 $(document).ready(function(){
@@ -98,4 +141,4 @@ function updateNotes(dayObject) {
     let res = $(this).children("div");
     $(this).children("textarea").text(dayObject[res.text()]);
     })
-}
+}}
