@@ -2,10 +2,8 @@
 const currentDayContainer = document.getElementById('currentDay')
 var now = moment().format('LLL');
 currentDayContainer.innerText = now;
-
 let currentTime = moment().hour();
 // currentTime = 12;
-
 
 // workDay object //
 let workDay = {
@@ -38,7 +36,6 @@ function hourNumberFromHourString(hourString) {
 }
 
 // pulls up workDay object when page loads //
-function myCalendar(){
     $(document).ready(function(){
         if(!localStorage.getItem('workDay')) {
         updateNotes(workDay);
@@ -46,7 +43,6 @@ function myCalendar(){
         updateNotes(JSON.parse(localStorage.getItem('workDay')));
         }
     })
-    }
 
 
     // created if/else if statements for all three possibilities in each hour //
@@ -169,4 +165,3 @@ function updateNotes(dayObject) {
     $(this).children("textarea").text(dayObject[res.text()]);
     })
     }
-myCalendar();
